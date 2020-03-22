@@ -1,5 +1,6 @@
 package com.practice.mongodb.springdata;
 
+import com.practice.mongodb.springdata.entity.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

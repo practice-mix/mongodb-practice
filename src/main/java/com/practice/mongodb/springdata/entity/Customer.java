@@ -1,14 +1,16 @@
-package com.practice.mongodb.springdata;
+package com.practice.mongodb.springdata.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
+@Document("customer")
 public class Customer {
 
-  @Id
+  @Id  // not required, auto select the named 'id' field as the id
   public String id;
 
   public String firstName;
