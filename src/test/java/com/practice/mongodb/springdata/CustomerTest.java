@@ -5,10 +5,12 @@ import com.practice.mongodb.springdata.entity.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = MongodbPracticeApplication.class)
-@AutoConfigureDataMongo
+//@SpringBootTest(classes = MongodbPracticeApplication.class)
+//@AutoConfigureDataMongo
+@DataMongoTest
 public class CustomerTest {
     @Autowired
     private CustomerRepository repository;
@@ -25,7 +27,7 @@ public class CustomerTest {
         for (Customer customer : repository.findAll()) {
             System.out.println("customer = " + customer);
         }
-        System.out.println(repository.findByFirstName("Alice"));
+        System.out.println(repository.findByFirstName("Alice").get(0));
         for (Customer customer : repository.findByLastName("Smith")) {
             System.out.println("customer = " + customer);
         }
