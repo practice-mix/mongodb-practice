@@ -1,4 +1,4 @@
-package com.practice.mongodb.springdata.entity;
+package com.practice.mongodb.springdatarest.entity;
 
 import org.springframework.data.annotation.Id;
 
