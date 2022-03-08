@@ -1,6 +1,6 @@
 spring:
   data:
     mongodb:
-      database: spring_data
+      database: test
       host: localhost
       port: 27017

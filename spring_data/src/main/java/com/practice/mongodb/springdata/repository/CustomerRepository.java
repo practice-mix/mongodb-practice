@@ -1,4 +1,4 @@
-package com.practice.mongodb.springdata;
+package com.practice.mongodb.springdata.repository;
 
 import com.practice.mongodb.springdata.entity.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;

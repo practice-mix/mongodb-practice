@@ -1,6 +1,7 @@
 package com.practice.mongodb.springdata;
 
 import com.practice.mongodb.springdata.entity.Customer;
+import com.practice.mongodb.springdata.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
