@@ -1,9 +1,7 @@
 package com.practice.mongodb.springdata.entity;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -25,6 +23,13 @@ public class Person {
 
     @LastModifiedDate
     private LocalDateTime updateTime;
+
+    @CreatedBy
+    private String createUser;
+
+    @LastModifiedBy
+    private String updateUser;
+
 
     public Person() {
     }
