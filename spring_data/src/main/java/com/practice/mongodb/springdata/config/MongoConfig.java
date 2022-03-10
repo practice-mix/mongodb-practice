@@ -10,7 +10,7 @@
 //public abstract class MongoConfig extends AbstractMongoClientConfiguration {
 //
 //    @Override
-//    protected Collection<String> getMappingBasePackages() {
+//    protected Collection<String> getMappingBasePackages() {// need not.  spring boot have done it
 //        return Arrays.asList("com.practice.mongodb.springdata.entity");
 //    }
 //}
