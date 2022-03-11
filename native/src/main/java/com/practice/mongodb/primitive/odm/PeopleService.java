@@ -1,7 +1,7 @@
 package com.practice.mongodb.primitive.odm;
 
+import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -28,13 +28,27 @@ public class PeopleService {
     private static MongoDatabase database;
     private static MongoCollection<Person> collection;
 
+    /**
+     * @see ConnectionString
+     */
     @BeforeAll
     public static void beforeAll() {
         CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-        mongoClient = MongoClients.create(MongoClientSettings.builder().codecRegistry(codecRegistry)
-                .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress("localhost", 27017))))
-                .build());
+
+        MongoClientSettings clientSettings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString("mongodb://localhost:27017/?maxPoolSize=100&waitQueueTimeoutMS=3000&maxConnecting=5"))
+                .codecRegistry(codecRegistry)
+                .build();
+
+        mongoClient = MongoClients.create(clientSettings);
+
+//        mongoClient = MongoClients.create(MongoClientSettings.builder().codecRegistry(codecRegistry)
+//                .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress("localhost", 27017))))
+//                .build());
+
+//        mongoClient = MongoClients.create("mongodb://localhost:27017/?maxPoolSize=100&waitQueueTimeoutMS=3000&maxConnecting=5");
+
         database = mongoClient.getDatabase("java_primitive");
         collection = database.getCollection("people", Person.class);
 
