@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 
 @Configuration
-public abstract class MongoConfig /*extends AbstractMongoClientConfiguration*/ {
+public class MongoConfig /*extends AbstractMongoClientConfiguration*/ {
 
 
     @Bean

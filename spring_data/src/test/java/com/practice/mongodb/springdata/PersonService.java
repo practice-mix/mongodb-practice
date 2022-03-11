@@ -3,7 +3,7 @@ package com.practice.mongodb.springdata;
 import com.practice.mongodb.springdata.entity.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.List;
@@ -12,7 +12,8 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 import static org.springframework.data.mongodb.core.query.Update.update;
 
-@DataMongoTest
+@SpringBootTest(classes = MongodbPracticeApplication.class)
+//@DataMongoTest
 public class PersonService {
     @Autowired
     private MongoTemplate mongoTemplate;
