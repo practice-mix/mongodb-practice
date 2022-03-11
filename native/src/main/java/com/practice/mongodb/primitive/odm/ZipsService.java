@@ -133,42 +133,94 @@ db.zips.aggregate([
         public double avgPop;
     }
 
-
-    @Test
-    public void aggregate3() {
-        collection.aggregate(asList(
-                        Aggregates.group(Document.parse("{\n" +
-                                "                state: \"$state\",\n" +
-                                "                city: \"$city\"\n" +
-                                "            }"), Accumulators.sum("cityPop", "$pop"))
-                        , Aggregates.sort(Sorts.ascending("cityPop"))
-                        , Aggregates.group("$_id.state", asList(
-                                        Accumulators.last("maxCity", "$_id.city"),
-                                        Accumulators.last("maxPop", "$cityPop"),
-                                        Accumulators.first("minCity", "$_id.city"),
-                                        Accumulators.first("minPop", "$cityPop")
-
-                                )
-
-                        ),
-                        Aggregates.project(Document.parse("{\n" +
-                                "            _id: 0,\n" +
-                                "            state: \"$_id\",\n" +
-                                "            max: {\n" +
-                                "                city: \"$maxCity\",\n" +
-                                "                pop: \"$maxPop\"\n" +
-                                "            },\n" +
-                                "            min: {\n" +
-                                "                city: \"$minCity\",\n" +
-                                "                pop: \"$minPop\"\n" +
-                                "            }\n" +
-                                "        }"))
-
-                )
-                , Root3.class
-        ).forEach(doc -> System.out.println(doc.toString()));
-
+/*
+db.zips.aggregate([
+    {
+        $group: {
+            _id: {
+                state: "$state",
+                city: "$city"
+            },
+            cityPop: {
+                $sum: "$pop"
+            }
+        }
+    },
+    {
+        $sort: {
+            cityPop: 1
+        }
     }
+    ,
+    {
+        $group: {
+            _id: "$_id.state",
+            maxCity: {
+                $last: "$_id.city"
+            },
+            maxPop: {
+                $last: "$cityPop"
+            },
+            minCity: {
+                $first: "$_id.city"
+            },
+            minPop: {
+                $first: "$cityPop"
+            }
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            state: "$_id",
+            max: {
+                city: "$maxCity",
+                pop: "$maxPop"
+            },
+            min: {
+                city: "$minCity",
+                pop: "$minPop"
+            }
+        }
+    }
+])
+
+ */
+@Test
+public void aggregate3() {
+    collection.aggregate(asList(
+                    Aggregates.group(Document.parse("{\n" +
+                            "                state: \"$state\",\n" +
+                            "                city: \"$city\"\n" +
+                            "            }"), Accumulators.sum("cityPop", "$pop"))
+                    , Aggregates.sort(Sorts.ascending("cityPop"))
+                    , Aggregates.group("$_id.state", asList(
+                                    Accumulators.last("maxCity", "$_id.city"),
+                                    Accumulators.last("maxPop", "$cityPop"),
+                                    Accumulators.first("minCity", "$_id.city"),
+                                    Accumulators.first("minPop", "$cityPop")
+
+                            )
+
+                    ),
+                    Aggregates.project(Document.parse("{\n" +
+                            "            _id: 0,\n" +
+                            "            state: \"$_id\",\n" +
+                            "            max: {\n" +
+                            "                city: \"$maxCity\",\n" +
+                            "                pop: \"$maxPop\"\n" +
+                            "            },\n" +
+                            "            min: {\n" +
+                            "                city: \"$minCity\",\n" +
+                            "                pop: \"$minPop\"\n" +
+                            "            }\n" +
+                            "        }"))
+
+            )
+            , Root3.class
+    ).forEach(doc -> System.out.println(doc.toString()));
+
+}
 
     @Data
     public static class Max {
